@@ -1,0 +1,8 @@
+workspace:
+  id: 21d52ff4-5cc3-443a-8de5-3fe79e3915b7
+cloudResources:
+  collections:
+    ../postman/collections/REST-API (ASSIGNMENT): 56654870-dff60d06-aff7-41a8-a780-f9f6b084efbf
+    ../postman/collections/Authentication: 56654870-045737fa-b4eb-44aa-a88b-b0c2ce49e909
+  documents:
+    ../postman/documents/WORKSPACE-README.md: a16787ef-c54b-4547-81b5-02adf7549399

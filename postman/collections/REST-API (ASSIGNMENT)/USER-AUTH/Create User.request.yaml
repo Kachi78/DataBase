@@ -1,0 +1,12 @@
+$kind: http-request
+url: localhost:3000/users/new-user
+method: POST
+body:
+  type: json
+  content: |-
+    {
+        "name" : "Emmanuel Chukwuemeka",
+        "regNumber" : "BAD/2026/TC-8/0072",
+        "email" : "mremmanuelonyekachi06@gmail.com"
+    }
+order: 1000

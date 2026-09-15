@@ -1,4 +1,5 @@
 const userModel = require("../model/userModel.js")
+
 /*
  * CRUD
  * CREATE USER (POST)

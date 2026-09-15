@@ -1,11 +1,13 @@
+require("dotenv").config();
+
 const express = require("express");
 const mongoose = require("mongoose");
 const userRoute = require("./routes/userRoutes.js");
 const productRoute = require("./routes/productRoutes.js");
-const compass_string = "mongodb://localhost:27017/kachi_81";
+const upload = require("./config/multer");
 
 mongoose
-  .connect(process.env.MONGO_URI)
+  .connect (process.env.MONGODB_URI || process.env.COMPASS_STRING)
   .then(() => console.log("MongoDB Connected"))
   .catch((err) => console.error("Connection Error: ", err));
 
@@ -19,7 +21,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/v1/user", userRoute);
-
+app.use("/api/v1/product", productRoute);
 app.listen(port, () => {
   console.log(`Server is up and running: ${port}`);
 });

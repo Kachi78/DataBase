@@ -1,0 +1,13 @@
+$kind: http-request
+url: localhost:8888/api/v1/user/new-user
+method: POST
+body:
+  type: json
+  content: |-
+    {
+        "name" : "Kachi Chukwuemeka",
+        "email" : "emmanuelchuks09@gmail.com",
+        "password" : "145698"
+    }
+settings: {}
+order: 3000

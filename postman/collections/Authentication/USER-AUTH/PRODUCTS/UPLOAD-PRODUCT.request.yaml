@@ -1,0 +1,16 @@
+$kind: http-request
+url: localhost:8888/api/v1/product/upload/6aa58d0866a377240edb09f7
+method: POST
+body:
+  type: json
+  content: |-
+    {
+        "name" : "Snickers",
+        "description" : "A white colored snicker with a a black colored edge, and a white lace.",
+        "price" : 36000,
+        "category" : "Fashion",
+        "stock" : true,
+        "quantity" : 25,
+        "image" : "image"
+    }
+order: 1000

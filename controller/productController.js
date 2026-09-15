@@ -1,45 +1,70 @@
-const productModel = require("../models/productModel");
-
+const productModel = require("../model/productModel");
+const userModel = require("../model/userModel");
+const cloudinary = require("../config/cloudinary");
+// import {v2 as cloudinary} from '../config/cloudinary'; --- IGNORE ---
 /**
  * create : upload product
- * get all :
- * get pne
- * update : update product(stock)
- * delete : delete product
+ * get all : fetch all products
+ * get one : fetch a single product
+ * update : update product (stock)
+ * delete : remove a product
  */
 
-//create / upload product
-
+//create / upload
 const uploadProduct = async (req, res) => {
-    try {
-        const { name, description, price, category, stock, quantity, image } = req.body;
+  try {
+    const getUserID = await userModel.findById(req.params.userId);
+    const { name, description, price, category, stock, quantity, image } =
+      req.body;
+    if (!getUserID) {
+      return res.status(404).json({
+        message: "User not found",
+      });
+    }
 
-        const product = await productModel.create(
-            {
-                name, description, price, category, stock, quantity, image
-            })
-
-    return res.status(201).json(
-        {
-            message: "Product uploaded successfully", product
+    if(!req.file){
+        return res.status(400).json({
+            message: "Image file is required...please upload an image file",
         })
-    } catch (error) {
-        return res.status(500).json({ message: "Internal server error", error: error.message })
     }
-}
+    const result = await cloudinary.uploader.upload(req.file.path)
+    const imageUrl = result.secure_url;
 
-// get all products
+    const product = await productModel.create({
+      name,
+      description,
+      price,
+      category,
+      stock,
+      quantity,
+      image: imageUrl,
+    });
 
+    await getUserID.products.push(product._id);
+    await getUserID.save();
+    return res.status(201).json({
+      message: "Product uploaded successfully",
+      product,
+    });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
+
+//get all
 const getAllProducts = async (req, res) => {
-    try {
-        const products = await productModel.find();
-        return res.status(200).json({ message: "All products retrieved successfully", products })
-    } catch (error) {
-        return res.status(500).json({ message: "Internal server error", error: error.message })
-    }
-}
+  try {
+    const getAll = await productModel.find();
+    return res.status(200).json({
+      message: "All products fetched successfully",
+      data: getAll,
+    });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
 
-exports = {
-    uploadProduct,
-    getAllProducts
-}
+module.exports = {
+  uploadProduct,
+  getAllProducts,
+};

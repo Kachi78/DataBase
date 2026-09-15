@@ -1,0 +1,4 @@
+$kind: http-request
+url: localhost:8888/api/v1/user/get-one-user/6aa9177c9acfa4c886347c19
+method: GET
+order: 4000

@@ -1,0 +1,10 @@
+$kind: http-request
+url: localhost:8888/api/v1/user/update-user/6aa9177c9acfa4c886347c19
+method: PATCH
+body:
+  type: json
+  content: |-
+    {
+        "name" : "Paul Knickers"
+    }
+order: 1769101315803516
