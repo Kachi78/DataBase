@@ -7,7 +7,7 @@ const productRoute = require("./routes/productRoutes.js");
 const upload = require("./config/multer");
 
 mongoose
-  .connect (process.env.MONGODB_URI || process.env.COMPASS_STRING)
+  .connect (process.env.MONGODB_URI)
   .then(() => console.log("MongoDB Connected"))
   .catch((err) => console.error("Connection Error: ", err));
 
