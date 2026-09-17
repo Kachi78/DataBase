@@ -27,9 +27,10 @@ const createUser = async (req, res) => {
 };
 
 //LOGIN USER
-const loginUser = async (res, req) => {
+const loginUser = async (req, res) => {
+  const { email, password } = req.body;
+  // login logic here
   try{
-    const { email, password } = req.body;
     const user = await userModel.findOne({ email });
     if(!user){
       return res.status(404).json({message: "Are you sure you have an account? User not found"})
